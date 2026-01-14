@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.3.20-Beta1"
-    id("com.gradleup.shadow") version "8.3.6"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.shadow)
 }
 
 group = "dev.srsouza.hytale.plot"
@@ -16,20 +16,16 @@ repositories {
 dependencies {
     compileOnly(files("libs/HytaleServer.jar"))
 
-    implementation(kotlin("stdlib"))
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinx.coroutines.core)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation(libs.bundles.exposed)
+    implementation(libs.hikaricp)
+    implementation(libs.h2)
 
-    implementation("org.jetbrains.exposed:exposed-core:0.46.0")
-    implementation("org.jetbrains.exposed:exposed-dao:0.46.0")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.46.0")
-    implementation("org.jetbrains.exposed:exposed-java-time:0.46.0")
-    implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("com.h2database:h2:2.2.224")
+    implementation(libs.slf4j.simple)
 
-    implementation("org.slf4j:slf4j-simple:2.0.9")
-
-    compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+    compileOnly(libs.jsr305)
 }
 
 kotlin {
