@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.srsouza.hytale.plot"
-version = "0.1.0"
+version = "0.2.0"
 
 val javaVersion = 25
 
@@ -77,7 +77,7 @@ tasks {
 tasks.register<Copy>("deployToServer") {
     dependsOn("shadowJar")
     from(tasks.shadowJar.get().archiveFile)
-    into(layout.projectDirectory.dir("../test-server/Mods"))
+    into(layout.projectDirectory.dir("../test-server2/mods"))
 
     doLast {
         println("Plugin deployed to test-server/Mods folder")

@@ -18,7 +18,12 @@ class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollecti
     "admin",
     "souza.plot.command.admin.desc"
 ) {
-
+    init {
+        addSubCommand(AdminClaimCommand(plugin))
+        addSubCommand(AdminSetSpawnCommand(plugin))
+        addSubCommand(AdminDeleteCommand(plugin))
+        addSubCommand(AdminInfoCommand(plugin))
+    }
 
     /**
      * /plot admin claim - Claim a plot for the server.

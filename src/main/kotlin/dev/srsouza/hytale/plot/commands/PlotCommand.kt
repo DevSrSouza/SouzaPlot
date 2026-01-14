@@ -12,5 +12,19 @@ class PlotCommand(plugin: PlotPlugin) : AbstractCommandCollection(
     "plot",
     "souza.plot.command.plot.desc"
 ) {
-
+    init {
+        addSubCommand(PlotClaimCommand(plugin))
+        addSubCommand(PlotAutoCommand(plugin))
+        addSubCommand(PlotHomeCommand(plugin))
+        addSubCommand(PlotVisitCommand(plugin))
+        addSubCommand(PlotInfoCommand(plugin))
+        addSubCommand(PlotListCommand(plugin))
+        addSubCommand(PlotAddCommand(plugin))
+        addSubCommand(PlotRemoveCommand(plugin))
+        addSubCommand(PlotDenyCommand(plugin))
+        addSubCommand(PlotUndenyCommand(plugin))
+        addSubCommand(PlotTpbackCommand(plugin))
+        addSubCommand(PlotHelpCommand(plugin))
+        addSubCommand(PlotAdminCommand(plugin))
+    }
 }

@@ -138,7 +138,7 @@ class PlotWorldManager(
         worldConfig.setWorldGenProvider(plotWorldGenProvider)
 
         val requiredPlugins = HashMap<PluginIdentifier, SemverRange>()
-        requiredPlugins[PluginIdentifier.fromString("Hytale:Plot")] = SemverRange.WILDCARD
+        requiredPlugins[PluginIdentifier.fromString("Souza:Plot")] = SemverRange.WILDCARD
         worldConfig.setRequiredPlugins(requiredPlugins)
 
         worldConfig.setTicking(true)
@@ -240,7 +240,7 @@ class PlotWorldManager(
 
     /**
      * Internal method to teleport a player to a position.
-     * Must execute on the target world's thread.
+     * Must execute on the player's current world thread since the component belongs to that store.
      */
     private fun teleportPlayer(player: PlayerRef, targetWorld: World, position: Vector3d, rotation: Vector3f = Vector3f(0f, 0f, 0f)) {
         val ref = player.reference
@@ -249,8 +249,15 @@ class PlotWorldManager(
             return
         }
 
-        // Execute on the target world's thread to avoid threading issues
-        targetWorld.execute {
+        // Get the player's current world - component operations must happen on that thread
+        val currentWorld = getWorldFromPlayer(player)
+        if (currentWorld == null) {
+            plugin.logger.atWarning().log("Cannot teleport player: current world not found")
+            return
+        }
+
+        // Execute on the player's current world thread since the store belongs to that world
+        currentWorld.execute {
             val store = ref.store
             // Use Teleport component with target world - handles both same-world and cross-world teleportation
             val teleport = Teleport(targetWorld, position, rotation)

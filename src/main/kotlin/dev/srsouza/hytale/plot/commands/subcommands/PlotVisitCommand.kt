@@ -10,7 +10,8 @@ import com.hypixel.hytale.server.core.entity.entities.Player
 import com.hypixel.hytale.server.core.universe.Universe
 
 /**
- * /plot visit <player> - Visit another player's plot.
+ * /plot visit <player> [index] - Visit another player's plot.
+ * Index is 1-based (first plot is 1).
  */
 class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
     "visit",
@@ -23,6 +24,11 @@ class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
         ArgTypes.STRING
     )
 
+    private val indexArg = withOptionalArg(
+        "index",
+        "souza.plot.command.visit.index.desc",
+        ArgTypes.STRING
+    )
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {
@@ -35,7 +41,7 @@ class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
 
         val targetName = playerArg.get(context)
         if (targetName.isNullOrBlank()) {
-            context.sendMessage(Message.raw("Usage: /plot visit <player>"))
+            context.sendMessage(Message.raw("Usage: /plot visit <player> [index]"))
             return
         }
 
@@ -51,7 +57,7 @@ class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
             return
         }
 
-        val targetPlots = plugin.plotManager.getPlayerPlots(targetUuid)
+        val targetPlots = plugin.plotManager.getPlayerPlots(targetUuid).toList()
         if (targetPlots.isEmpty()) {
             context.sendMessage(Message.raw(plugin.config.messages.format(
                 plugin.config.messages.plotNotFound
@@ -59,7 +65,23 @@ class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
             return
         }
 
-        val plotId = targetPlots.first()
+        val indexStr = indexArg.get(context)
+        val index = if (indexStr.isNullOrBlank()) {
+            1
+        } else {
+            indexStr.toIntOrNull()?.coerceIn(1, targetPlots.size) ?: 1
+        }
+
+        if (index < 1 || index > targetPlots.size) {
+            context.sendMessage(Message.raw(plugin.config.messages.format(
+                plugin.config.messages.invalidPlotIndex,
+                index,
+                targetPlots.size
+            )))
+            return
+        }
+
+        val plotId = targetPlots[index - 1]
         val plot = plugin.plotManager.getPlot(plotId)
 
         if (plot != null && plot.isDenied(player.uuid!!)) {
