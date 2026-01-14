@@ -1,0 +1,16 @@
+{
+  "Group": "Souza",
+  "Name": "Plot",
+  "Version": "${version}",
+  "Authors": [
+    {
+      "Name": "Gabriel Souza",
+      "Email": "modding@srsouza.dev",
+      "Url": "https://github.com/DevSrSouza"
+    }
+  ],
+  "Website": "https://github.com/DevSrSouza/SouzaPlot",
+  "Main": "dev.srsouza.hytale.plot.PlotPlugin",
+  "ServerVersion": "*",
+  "Description": "A plot world plugin for Hytale servers - claim plots, build, and protect your creations"
+}
