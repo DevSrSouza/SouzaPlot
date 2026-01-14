@@ -2,6 +2,8 @@
 
 A plot world plugin for Hytale servers - claim plots, build, and protect your creations. Inspired by PlotSquared and PlotMe from Minecraft.
 
+![](https://i.imgur.com/ifBqeoj.jpeg)
+
 ## Features
 
 - **Plot Claiming System** - Players can claim plots and own land in a dedicated plot world
