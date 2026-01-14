@@ -14,8 +14,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotDenyCommand(private val plugin: PlotPlugin) : CommandBase(
     "deny",
-    "souza.plot.command.deny.desc"
+    "Deny a player from entering your plot"
 ) {
+    init {
+        requirePermission("souza.plot.command.deny")
+    }
 
     private val playerArg = withRequiredArg(
         "player",

@@ -15,8 +15,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotVisitCommand(private val plugin: PlotPlugin) : CommandBase(
     "visit",
-    "souza.plot.command.visit.desc"
+    "Visit another player's plot"
 ) {
+    init {
+        requirePermission("souza.plot.command.visit")
+    }
 
     private val playerArg = withRequiredArg(
         "player",

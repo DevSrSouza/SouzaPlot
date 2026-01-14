@@ -14,8 +14,11 @@ import com.hypixel.hytale.server.core.entity.entities.Player
  */
 class PlotHomeCommand(private val plugin: PlotPlugin) : CommandBase(
     "home",
-    "souza.plot.command.home.desc"
+    "Teleport to your plot by index"
 ) {
+    init {
+        requirePermission("souza.plot.command.home")
+    }
 
     private val indexArg = withOptionalArg(
         "index",

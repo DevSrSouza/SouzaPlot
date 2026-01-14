@@ -13,9 +13,11 @@ import com.hypixel.hytale.server.core.entity.entities.Player
  */
 class PlotAutoCommand(private val plugin: PlotPlugin) : CommandBase(
     "auto",
-    "souza.plot.command.auto.desc"
+    "Automatically claim a random plot and teleport to it"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.auto")
+    }
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {

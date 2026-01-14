@@ -14,9 +14,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotTpbackCommand(private val plugin: PlotPlugin) : CommandBase(
     "tpback",
-    "souza.plot.command.tpback.desc"
+    "Teleport back to your previous location"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.tpback")
+    }
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {

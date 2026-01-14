@@ -13,9 +13,11 @@ import com.hypixel.hytale.server.core.entity.entities.Player
  */
 class PlotClaimCommand(private val plugin: PlotPlugin) : CommandBase(
     "claim",
-    "souza.plot.command.claim.desc"
+    "Claim the plot you are standing in"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.claim")
+    }
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {

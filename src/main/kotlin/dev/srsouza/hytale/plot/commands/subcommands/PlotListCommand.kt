@@ -11,9 +11,11 @@ import com.hypixel.hytale.server.core.entity.entities.Player
  */
 class PlotListCommand(private val plugin: PlotPlugin) : CommandBase(
     "list",
-    "souza.plot.command.list.desc"
+    "List all your claimed plots"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.list")
+    }
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {

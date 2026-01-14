@@ -16,9 +16,10 @@ import com.hypixel.hytale.server.core.permissions.PermissionsModule
  */
 class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollection(
     "admin",
-    "souza.plot.command.admin.desc"
+    "Admin commands for plot management"
 ) {
     init {
+        requirePermission("souza.plot.command.admin")
         addSubCommand(AdminClaimCommand(plugin))
         addSubCommand(AdminSetSpawnCommand(plugin))
         addSubCommand(AdminDeleteCommand(plugin))
@@ -30,8 +31,12 @@ class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollecti
      */
     private class AdminClaimCommand(private val plugin: PlotPlugin) : CommandBase(
         "claim",
-        "souza.plot.command.admin.claim.desc"
+        "Claim a plot for the server"
     ) {
+        init {
+            requirePermission("souza.plot.command.admin.claim")
+        }
+
         override fun executeSync(context: CommandContext) {
             if (!context.isPlayer) {
                 context.sendMessage(Message.raw(plugin.config.messages.playerOnly))
@@ -94,8 +99,12 @@ class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollecti
      */
     private class AdminSetSpawnCommand(private val plugin: PlotPlugin) : CommandBase(
         "setspawn",
-        "souza.plot.command.admin.setspawn.desc"
+        "Set the plot world spawn location"
     ) {
+        init {
+            requirePermission("souza.plot.command.admin.setspawn")
+        }
+
         override fun executeSync(context: CommandContext) {
             if (!context.isPlayer) {
                 context.sendMessage(Message.raw(plugin.config.messages.playerOnly))
@@ -136,8 +145,12 @@ class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollecti
      */
     private class AdminDeleteCommand(private val plugin: PlotPlugin) : CommandBase(
         "delete",
-        "souza.plot.command.admin.delete.desc"
+        "Delete a plot"
     ) {
+        init {
+            requirePermission("souza.plot.command.admin.delete")
+        }
+
         override fun executeSync(context: CommandContext) {
             if (!context.isPlayer) {
                 context.sendMessage(Message.raw(plugin.config.messages.playerOnly))
@@ -193,8 +206,12 @@ class PlotAdminCommand(private val plugin: PlotPlugin) : AbstractCommandCollecti
      */
     private class AdminInfoCommand(private val plugin: PlotPlugin) : CommandBase(
         "info",
-        "souza.plot.command.admin.info.desc"
+        "Show admin info about the plugin"
     ) {
+        init {
+            requirePermission("souza.plot.command.admin.info")
+        }
+
         override fun executeSync(context: CommandContext) {
             if (context.isPlayer) {
                 val player = context.senderAs(Player::class.java)

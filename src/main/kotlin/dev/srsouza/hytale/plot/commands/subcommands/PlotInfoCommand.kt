@@ -13,9 +13,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotInfoCommand(private val plugin: PlotPlugin) : CommandBase(
     "info",
-    "souza.plot.command.info.desc"
+    "Show information about the current plot"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.info")
+    }
 
     override fun executeSync(context: CommandContext) {
         if (!context.isPlayer) {

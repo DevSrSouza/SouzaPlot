@@ -15,8 +15,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotAddCommand(private val plugin: PlotPlugin) : CommandBase(
     "add",
-    "souza.plot.command.add.desc"
+    "Add a member to your plot"
 ) {
+    init {
+        requirePermission("souza.plot.command.add")
+    }
 
     private val playerArg = withRequiredArg(
         "player",

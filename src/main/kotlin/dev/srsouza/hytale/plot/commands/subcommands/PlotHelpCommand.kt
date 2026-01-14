@@ -10,9 +10,11 @@ import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase
  */
 class PlotHelpCommand(private val plugin: PlotPlugin) : CommandBase(
     "help",
-    "souza.plot.command.help.desc"
+    "Show help for plot commands"
 ) {
-
+    init {
+        requirePermission("souza.plot.command.help")
+    }
 
     override fun executeSync(context: CommandContext) {
         context.sendMessage(Message.raw("=== Plot Commands ==="))

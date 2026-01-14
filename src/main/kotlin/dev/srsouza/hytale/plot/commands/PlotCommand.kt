@@ -10,9 +10,10 @@ import com.hypixel.hytale.server.core.command.system.basecommands.AbstractComman
  */
 class PlotCommand(plugin: PlotPlugin) : AbstractCommandCollection(
     "plot",
-    "souza.plot.command.plot.desc"
+    "Plot management commands"
 ) {
     init {
+        requirePermission("souza.plot.command.plot")
         addSubCommand(PlotClaimCommand(plugin))
         addSubCommand(PlotAutoCommand(plugin))
         addSubCommand(PlotHomeCommand(plugin))

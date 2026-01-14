@@ -14,8 +14,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotUndenyCommand(private val plugin: PlotPlugin) : CommandBase(
     "undeny",
-    "souza.plot.command.undeny.desc"
+    "Remove a player from the deny list"
 ) {
+    init {
+        requirePermission("souza.plot.command.undeny")
+    }
 
     private val playerArg = withRequiredArg(
         "player",

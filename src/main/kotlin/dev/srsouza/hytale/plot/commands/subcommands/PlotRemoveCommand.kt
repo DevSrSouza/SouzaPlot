@@ -14,8 +14,11 @@ import com.hypixel.hytale.server.core.universe.Universe
  */
 class PlotRemoveCommand(private val plugin: PlotPlugin) : CommandBase(
     "remove",
-    "souza.plot.command.remove.desc"
+    "Remove a member from your plot"
 ) {
+    init {
+        requirePermission("souza.plot.command.remove")
+    }
 
     private val playerArg = withRequiredArg(
         "player",
