@@ -55,6 +55,8 @@ class PlotPlugin(@Nonnull init: JavaPluginInit) : JavaPlugin(init) {
 
         try {
             config = _config.get()
+            // Save config to disk to generate default config file for users to edit
+            _config.save()
             logger.atInfo().log("Configuration loaded: plotSize=%d, roadWidth=%d", config.plotSize, config.roadWidth)
 
             registerWorldGenProvider()
