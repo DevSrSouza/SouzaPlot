@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.srsouza.hytale.plot"
-version = "1.0.0-SNAPSHOT"
+version = "0.1.0"
 
 val javaVersion = 25
 
